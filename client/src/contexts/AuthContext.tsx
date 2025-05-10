@@ -1,10 +1,18 @@
 import {createContext, type ReactNode, useContext, useEffect, useState} from "react";
 
-const AuthContext = createContext({
+
+type AuthContextType = {
+    isAdmin: boolean;
+    needsPrompt: boolean;
+    setNeedsPrompt: (value: boolean) => void;
+    checkAuth: (token: string) => void;
+}
+
+const AuthContext = createContext<AuthContextType>({
     isAdmin: false,
     needsPrompt: false,
-    setNeedsPrompt: (needsPrompt:boolean) => {},
-    checkAuth: (tokenPrompt:string) => {}
+    setNeedsPrompt:  () => {},
+    checkAuth: () => {}
 })
 
 export const useAuth = () => {

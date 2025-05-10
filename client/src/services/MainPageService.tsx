@@ -11,25 +11,46 @@ const MainPageService = () => {
     const [mainPage, setMainPage] = useState<MainPageInterface | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>("");
+    const [image, setImage] = useState<Blob | null>(null);
+    const [imgURL, setImgURL] = useState<string>("");
 
     useEffect(() => {
         fetchMainPage()
     },[])
 
+    useEffect(() => {
+        if (image) {
+            const objectUrl = URL.createObjectURL(image);
+            setImgURL(objectUrl);
+
+            return () => {
+                URL.revokeObjectURL(objectUrl);
+            };
+        }
+    }, [image]);
+
     const fetchMainPage = async () => {
         await getMainContent(setLoading,`${import.meta.env.VITE_BASE_URL}/main/${1}`,setError,setMainPage)
+        await getMainContent(setLoading,`${import.meta.env.VITE_BASE_URL}/main/image`,setError,setImage)
     }
+
+
 
     if (loading) {
         return <LoadingSpinner/>;
     }
 
-    return (
-        <>
-            {error && <Error error={error} setError={setError} />}
-            <MainPage
-                      {...mainPage}/>
-        </>
-    )
+    if (mainPage && imgURL) {
+        return (
+            <>
+                {error && <Error error={error} setError={setError} />}
+                <MainPage
+                    {...mainPage}
+                    image={imgURL}
+                />
+            </>
+        );
+    }
+
 }
 export default MainPageService

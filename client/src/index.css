@@ -15,11 +15,17 @@ h1 {
     font-weight: 500;
 }
 
+h2 {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
 .ubuntu-regular,p,div {
     font-family: "Ubuntu", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
+
 
 
 @layer components {
@@ -53,12 +59,17 @@ h1 {
         @apply fixed top-0 py-4 bg-gradient-to-r gap-4 z-40 shadow-md shadow-sky-300 hidden from-teal-600 to-sky-700 w-full md:flex justify-center items-center
     }
     .navbar-burger {
-        @apply fixed top-0 py-3 bg-gradient-to-r gap-4 shadow-md shadow-sky-300 from-teal-600 to-sky-700 w-full flex justify-center items-center md:hidden
+        @apply fixed top-0 py-3 bg-gradient-to-r gap-4 z-40 shadow-md shadow-sky-300 from-teal-600 to-sky-700 w-full flex justify-center items-center md:hidden
     }
     .navbar-burger-animation {
         @apply block w-8 h-0.5 bg-white transition-all duration-300
     }
     .navbar-dropdown {
         @apply select-none absolute gap-y-1 flex flex-col items-center justify-center shadow-md shadow-gray-500 border-white border left-1/2 -translate-x-1/2 top-[90%] rounded-xl bg-gradient-to-b px-[4rem] py-4 from-teal-600 to-sky-700
+    }
+
+    /* Arrow classes */
+    .arrow {
+        @apply duration-350 hover:bg-teal-300/70 bg-teal-300/50 w-[26px] h-[26px] p-2 box-content rounded-full cursor-pointer
     }
 }
